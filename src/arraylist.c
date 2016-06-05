@@ -31,7 +31,7 @@ void arraylist_free(arraylist_t* lst){
  * Resizes the list to the specified size. Returns t/f depending on the
  * successful allocation of the requested amount of memory
  */
-bool arraylist_resize(arraylist_t* lst, size_t size){
+bool arraylist_resize(arraylist_t* lst, const size_t size){
     lst->size = size;
     lst->list = (void**) realloc(lst->list, size*sizeof(void*));
     return lst->list != NULL;
@@ -44,7 +44,7 @@ bool arraylist_resize(arraylist_t* lst, size_t size){
  * changed. Returns t/f depending on the successful allocation of the necessary 
  * amount of memory
  */
-bool arraylist_reserve(arraylist_t* lst, size_t items){
+bool arraylist_reserve(arraylist_t* lst, const size_t items){
     if (lst->size < items){
         return arraylist_resize(lst, arraylist_resize_factor*lst->size);
     }
@@ -69,7 +69,7 @@ bool arraylist_append(arraylist_t* lst, void* data){
  * will be moved to the next index. Returns t/f on the successful addition of
  * the data and possible reallocation of memory
  */
-bool arraylist_add(arraylist_t* lst, size_t ind, void* data){
+bool arraylist_add(arraylist_t* lst, const size_t ind, void* data){
     bool success = arraylist_reserve(lst, lst->length + 1);
     if(success){
         size_t i;
@@ -86,7 +86,7 @@ bool arraylist_add(arraylist_t* lst, size_t ind, void* data){
  * Removes the data at the specified index from the list and returns the removed
  * data pointer
  */
-void* arraylist_remove(arraylist_t* lst, size_t ind){
+void* arraylist_remove(arraylist_t* lst, const size_t ind){
     void* data = lst->list[ind];
     size_t i;
     for(i = ind; i < lst->length - 1; i++){
@@ -112,7 +112,7 @@ void** arraylist_toarray(arraylist_t* lst){
 /**
  * Returns the item at the specified index of the arraylist
  */
-void* arraylist_get(arraylist_t* lst, size_t ind){
+void* arraylist_get(arraylist_t* lst, const size_t ind){
     return lst->list[ind];
 }
 
@@ -121,8 +121,8 @@ void* arraylist_get(arraylist_t* lst, size_t ind){
  * function to check for equality. Returns the index at which the item was found
  * or -1 if it was not found
  */
-ptrdiff_t arraylist_indexof(arraylist_t* lst, void* data, 
-                            int (*cmp) (void*, void*)){
+ptrdiff_t arraylist_indexof(arraylist_t* lst, const void* data, 
+                            int (*cmp) (const void*, const void*)){
     size_t i = 0;
     while(i < lst->length && (*cmp)(data, lst->list[i]) != 0){
         i++;
