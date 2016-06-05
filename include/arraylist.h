@@ -20,10 +20,10 @@ bool arraylist_append(arraylist_t*, void*);
 bool arraylist_add(arraylist_t*, const size_t, void*);
 void* arraylist_remove(arraylist_t*, const size_t);
 
-size_t arraylist_length(arraylist_t*);
-void** arraylist_toarray(arraylist_t*);
-void* arraylist_get(arraylist_t*, const size_t);
-ptrdiff_t arraylist_indexof(arraylist_t*, const void*, 
+size_t arraylist_length(const arraylist_t*);
+void** arraylist_toarray(const arraylist_t*);
+void* arraylist_get(const arraylist_t*, const size_t);
+ptrdiff_t arraylist_indexof(const arraylist_t*, const void*, 
                             int (*cmp) (const void*, const void*));
 
 #endif

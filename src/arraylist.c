@@ -98,21 +98,21 @@ void* arraylist_remove(arraylist_t* lst, const size_t ind){
 /**
  * Returns the number of items in the arraylist
  */
-size_t arraylist_length(arraylist_t* lst){
+size_t arraylist_length(const arraylist_t* lst){
     return lst->length;
 }
 
 /**
  * Returns a pointer to the dynamic array contained in this arraylist
  */
-void** arraylist_toarray(arraylist_t* lst){
+void** arraylist_toarray(const arraylist_t* lst){
     return lst->list;
 }
 
 /**
  * Returns the item at the specified index of the arraylist
  */
-void* arraylist_get(arraylist_t* lst, const size_t ind){
+void* arraylist_get(const arraylist_t* lst, const size_t ind){
     return lst->list[ind];
 }
 
@@ -121,7 +121,7 @@ void* arraylist_get(arraylist_t* lst, const size_t ind){
  * function to check for equality. Returns the index at which the item was found
  * or -1 if it was not found
  */
-ptrdiff_t arraylist_indexof(arraylist_t* lst, const void* data, 
+ptrdiff_t arraylist_indexof(const arraylist_t* lst, const void* data, 
                             int (*cmp) (const void*, const void*)){
     size_t i = 0;
     while(i < lst->length && (*cmp)(data, lst->list[i]) != 0){
