@@ -1,7 +1,7 @@
 /*
  c dynamic array structure
 */
-#include "../include/arraylist.h"
+#include "arraylist.h"
 
 const size_t arraylist_initsize = 8;
 const size_t arraylist_resize_factor = 2;
