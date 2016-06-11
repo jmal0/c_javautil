@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "arraylist.h"
 #include "linkedlist.h"
+#include "priorityqueue.h"
 
 int cmp_str(const void* a, const void* b){
     return strcmp(*((char**) a), *((char**) b));
@@ -91,6 +92,49 @@ void test_linkedlist(){
     free(lst);
 }
 
+void test_priorityqueue(){
+    // test init and length
+    priorityqueue_t* pq = (priorityqueue_t*) malloc(sizeof(priorityqueue_t));
+    priorityqueue_init(pq, cmp_str);
+    assert(priorityqueue_size(pq) == 0);
+
+    // test add & peek
+    char* elem2 = "element 2";
+    priorityqueue_add(pq, (void*) &elem2);
+    char* elem1 = "element 1";
+    priorityqueue_add(pq, (void*) &elem1);
+    assert(priorityqueue_size(pq) == 2);
+    assert(strncmp(*((char**) priorityqueue_peek(pq)), elem1, 9) == 0);
+
+    // test poll
+    assert(strncmp(*((char**) priorityqueue_poll(pq)), elem1, 9) == 0);
+    assert(priorityqueue_size(pq) == 1);
+    assert(strncmp(*((char**) priorityqueue_peek(pq)), elem2, 9) == 0);
+    assert(validate_heap(pq->data, pq->length, cmp_str));
+
+    // test addall
+    const void* elems[8] = {(void*) "1", (void*) "2", (void*) "3", (void*) "4", (void*) "5", (void*) "6", (void*) "7", (void*) "8"};
+    priorityqueue_addall(pq, elems, 8);
+    assert(priorityqueue_size(pq) == 9);
+    printf("test\n");
+    assert(strncmp(*((char**) priorityqueue_peek(pq)), "1", 9) == 0);
+/*
+    // test remove
+    priorityqueue_remove(pq, 0);
+    assert(priorityqueue_length(pq) == 1);
+    assert(priorityqueue_indexof(pq, (void*) &elem2, cmp_str) == 0);
+    char* elem3 = "element 3";
+    priorityqueue_append(pq, (void*) &elem3);
+    assert(priorityqueue_length(pq) == 2);
+    assert(priorityqueue_remove(pq, 1) != NULL);
+    assert(priorityqueue_length(pq) == 1);
+    assert(priorityqueue_indexof(pq, (void*) &elem3, cmp_str) == -1);
+*/
+    // test free
+    priorityqueue_free(pq);
+    free(pq);
+}
+
 int main(int argc, char const *argv[]){
     printf("Testing arraylist\n");
     test_arraylist();
@@ -99,5 +143,9 @@ int main(int argc, char const *argv[]){
     printf("Testing linkedlist\n");
     test_linkedlist();
     printf("Linkedlist passed tests\n");
+
+    printf("Testing priorityqueue\n");
+    test_priorityqueue();
+    printf("Priorityqueue passed tests\n");
     return 0;
 }
