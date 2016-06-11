@@ -18,7 +18,9 @@ bool arraylist_reserve(arraylist_t*, const size_t);
 
 bool arraylist_append(arraylist_t*, void*);
 bool arraylist_add(arraylist_t*, const size_t, void*);
+bool arraylist_addall(arraylist_t*, const size_t, const size_t, void**);
 void* arraylist_remove(arraylist_t*, const size_t);
+void arraylist_clear(arraylist_t*);
 
 size_t arraylist_length(const arraylist_t*);
 void** arraylist_toarray(const arraylist_t*);
