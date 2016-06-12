@@ -26,12 +26,12 @@ struct priorityqueue_t{
 };
 
 bool priorityqueue_init(priorityqueue_t*, int (*)(const void*, const void*));
-bool priorityqueue_reserve(priorityqueue_t*, size_t size);
 void priorityqueue_free(priorityqueue_t*);
+bool priorityqueue_reserve(priorityqueue_t*, size_t size);
 
 bool priorityqueue_add(priorityqueue_t*, void*);
 bool priorityqueue_addall(priorityqueue_t*, void**, const size_t len);
-bool priorityqueue_remove(priorityqueue_t*, void*);
+bool priorityqueue_remove(priorityqueue_t*, const void*);
 void priorityqueue_clear(priorityqueue_t*);
 void* priorityqueue_poll(priorityqueue_t*);
 
@@ -40,7 +40,6 @@ size_t priorityqueue_size(const priorityqueue_t*);
 void** priorityqueue_toarray(const priorityqueue_t*);
 void* priorityqueue_peek(const priorityqueue_t*);
 
-bool validate_heap(const void**, const size_t, 
-                    int (*)(const void*, const void*));
+bool validate_heap(const priorityqueue_t*);
 
 #endif

@@ -26,6 +26,6 @@ size_t arraylist_length(const arraylist_t*);
 void** arraylist_toarray(const arraylist_t*);
 void* arraylist_get(const arraylist_t*, const size_t);
 ptrdiff_t arraylist_indexof(const arraylist_t*, const void*, 
-                            int (*cmp) (const void*, const void*));
+                            int (*)(const void*, const void*));
 
 #endif

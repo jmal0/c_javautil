@@ -106,30 +106,33 @@ void test_priorityqueue(){
     assert(priorityqueue_size(pq) == 2);
     assert(strncmp(*((char**) priorityqueue_peek(pq)), elem1, 9) == 0);
 
-    // test poll
+    // test poll and validate heap
     assert(strncmp(*((char**) priorityqueue_poll(pq)), elem1, 9) == 0);
     assert(priorityqueue_size(pq) == 1);
     assert(strncmp(*((char**) priorityqueue_peek(pq)), elem2, 9) == 0);
-    assert(validate_heap(pq->data, pq->length, cmp_str));
+    assert(validate_heap(pq));
 
     // test addall
-    const void* elems[8] = {(void*) "1", (void*) "2", (void*) "3", (void*) "4", (void*) "5", (void*) "6", (void*) "7", (void*) "8"};
+    char* e1 = "1";
+    char* e2 = "2";
+    char* e3 = "3";
+    char* e4 = "4";
+    char* e5 = "5";
+    char* e6 = "6";
+    char* e7 = "7";
+    char* e8 = "8";
+    void* elems[8] = {&e4, &e1, &e7, &e6, &e3, &e5, &e2, &e8};
     priorityqueue_addall(pq, elems, 8);
     assert(priorityqueue_size(pq) == 9);
-    printf("test\n");
     assert(strncmp(*((char**) priorityqueue_peek(pq)), "1", 9) == 0);
-/*
+    assert(validate_heap(pq));
+
     // test remove
-    priorityqueue_remove(pq, 0);
-    assert(priorityqueue_length(pq) == 1);
-    assert(priorityqueue_indexof(pq, (void*) &elem2, cmp_str) == 0);
-    char* elem3 = "element 3";
-    priorityqueue_append(pq, (void*) &elem3);
-    assert(priorityqueue_length(pq) == 2);
-    assert(priorityqueue_remove(pq, 1) != NULL);
-    assert(priorityqueue_length(pq) == 1);
-    assert(priorityqueue_indexof(pq, (void*) &elem3, cmp_str) == -1);
-*/
+    priorityqueue_remove(pq, &e1);
+    assert(strncmp(*((char**) priorityqueue_peek(pq)), "2", 9) == 0);
+    assert(priorityqueue_size(pq) == 8);
+    assert(validate_heap(pq));
+
     // test free
     priorityqueue_free(pq);
     free(pq);

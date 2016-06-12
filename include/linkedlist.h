@@ -27,6 +27,6 @@ size_t linkedlist_length(const linkedlist_t*);
 void** linkedlist_toarray(const linkedlist_t*);
 void* linkedlist_get(const linkedlist_t*, const size_t);
 ptrdiff_t linkedlist_indexof(const linkedlist_t*, const void*, 
-                            int (*cmp) (const void*, const void*));
+                            int (*)(const void*, const void*));
 
 #endif

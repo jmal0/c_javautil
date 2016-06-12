@@ -116,7 +116,7 @@ bool arraylist_addall(arraylist_t* lst, const size_t ind, const size_t len,
             lst->list[i] = lst->list[i - 1];
         }
         for(i = ind + len; i > ind; i--){
-            lst->list[i] = ary
+            lst->list[i] = ary[i];
         }
     }
     return success;

@@ -4,4 +4,5 @@ It's probably like a rite of passage or something for a c programmer to write da
 
 ## Types implemented so far
 * ArrayList: a dynamic array
-* LinkedList: a singly-linked list
+* LinkedList: a singly-linked list (half done)
+* PriorityQueue: a min-heap
